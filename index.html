@@ -20,13 +20,13 @@ label {
           ave.value=incent.value / parseInt(classes.value);
           total.value=parseInt(classes.value)*parseInt(base.value) + parseInt(incent.value);">
 
-<label for="base">Base Pay:</label>
+<label for="base">Base Pay: </label>
 <input type="number" id="base" name="base" min="7" max="10" step="1" value="7">
 <br>
-<label for="tier">Tier:</label>
+<label for="tier">Tier: </label>
 <input type="number" id="tier" name="tier" min="1" max="10" step="1" value="1">
 <br>
-<label for="classes">Classes/month:</label>
+<label for="classes">Classes/month: </label>
 <input type="number" id="classes" name="classes" min="1" max="1000" step="1" value="100">
 <br>
 <br>
@@ -41,6 +41,22 @@ label {
 <output name="total" for="base tier classes">842</output>
 </form>
 
+<br>
+<br>
+<br>
+
+<h3>Tier Calculator</h3>
+<form
+ oninput="tier.value=calcTier(parseInt(lifetime.value));">
+ 
+<label for="lifetime">Lifetime Classes: </label>
+<input type="number" id="lifetime" name="lifetime" min="0" max="100000" step="1" value="0">
+<br>
+<label>Tier: </label>
+<output name="tier" for="lifetime">1</output>
+<br>
+
+</form>
 
 <script>
 var tier1 = [.8,1.2,1.6,1.7,1.9,2.0,2.1];
@@ -99,6 +115,36 @@ function calcServiceFee(tier, classes) {
  }
  
  return total;
+}
+function calcTier(classes) {
+ if (classes<80) {
+  return 1;
+ }
+ if (classes<200) {
+  return 2;
+ }
+ if (classes<400) {
+  return 3;
+ }
+ if (classes<800) {
+  return 4;
+ }
+ if (classes<1500) {
+  return 5;
+ }
+ if (classes<2500) {
+  return 6;
+ }
+ if (classes<4500) {
+  return 7;
+ }
+ if (classes<7000) {
+  return 8;
+ }
+ if (classes<10000) {
+  return 9;
+ }
+ return 10;
 }
 </script>
 </body>
