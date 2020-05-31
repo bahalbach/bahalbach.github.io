@@ -3,6 +3,14 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <title>VIPKID Service Fee Calculator</title>
+<style>
+input {
+ width: 50px;
+}
+label {
+ width: 150px;
+}
+</style>
 </head>
 <body>
 <h1>VIPKID Service Fee Calculator</h1>
@@ -13,9 +21,10 @@
  
 <label for="tier">Tier:</label>
 <input type="number" id="tier" name="tier" min="1" max="10" step="1" value="7">
-
+<br>
 <label for="classes">Classes/month:</label>
 <input type="number" id="classes" name="classes" min="1" max="1000" step="1" value="200">
+<br>
 <br>
 <label>Total: </label>
 <output name="total" for="tier classes">341</output>
