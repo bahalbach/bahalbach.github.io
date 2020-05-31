@@ -1,6 +1,87 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title>VIPKID Service Fee Calculator</title>
+</head>
 <body>
 <h1>VIPKID Service Fee Calculator</h1>
+
+<form 
+ oninput="total.value=calcServiceFee(parseInt(tier.value),parseInt(classes.value))
+          ave.value=total.value / parseInt(classes.value)">
+ 
+<label for="tier">Tier:</label>
+<input type="number" id="tier" name="tier" min="1" max="10" step="1" value="7">
+
+<label for="classes">Classes/month:</label>
+<input type="number" id="classes" name="classes" min="1" max="1000" step="1" value="200">
+<br>
+<label>Total: </label>
+<output name="total" for="tier classes">415</output>
+<br>
+<label>Per Class: </label>
+<output name="ave" for="tier classes">2.075</output>
+</form>
+
+
+<script>
+var tier1 = [.8,1.2,1.6,1.7,1.9,2.0,2.1];
+var tier2 = [.8,1.2,1.6,1.7,1.9,2.1,2.3];
+var tier3 = [.8,1.2,1.6,1.7,2.0,2.2,2.5];
+var tier4 = [.8,1.2,1.6,1.8,2.1,2.3,2.6];
+var tier5 = [.8,1.2,1.6,1.8,2.2,2.4,2.7];
+var tier6 = [.8,1.2,1.7,1.8,2.3,2.5,2.8];
+var tier7 = [.8,1.2,1.7,1.9,2.4,2.6,2.9];
+var tier8 = [.8,1.2,1.7,1.9,2.4,2.7,3.0];
+var tier9 = [.8,1.2,1.7,1.9,2.5,2.8,3.1];
+var tier10 = [.8,1.2,1.7,1.9,2.5,2.9,3.2];
+
+var tiers = [tier1,tier2,tier3,tier4,tier5,tier6,tier7,tier8,tier9,tier10];
+
+function calcServiceFee(tier, classes) {
+ tier = tiers[tier-1];
+ var total = 0;
+ 
+ if (classes<=20) {
+  total += (classes-0) * tier[0]
+ } else {
+  total += 20 * tier[0]
+  
+  if (classes<=40) {
+   total += (classes-20) * tier[1]
+  } else {
+   total += 20 * tier[1]
+   
+   if (classes<=60) {
+    total += (classes-40) * tier[2]
+   } else {
+    total += 20 * tier[2]
+    
+    if (classes<=90) {
+     total += (classes-60) * tier[3]
+    } else {
+     total += 30 * tier[3]
+     
+     if (classes<=130) {
+      total += (classes-90) * tier[4]
+     } else {
+      total += 40 * tier[4]
+      
+      if (classes<=180) {
+       total += (classes-130) * tier[5]
+      } else {
+       total += 50 * tier[5]
+       
+       total += (classes-180) * tier[6]
+      }
+     }
+    }
+   }
+  }
+ }
+ 
+ return total;
+}
+</script>
 </body>
 </html>
