@@ -18,19 +18,24 @@ label {
 <form 
  oninput="incent.value=calcServiceFee(parseInt(tier.value),parseInt(classes.value));
           ave.value=incent.value / parseInt(classes.value);
-          total.value=parseInt(classes.value)*parseFloat(base.value) + parseFloat(incent.value);
+          total.value=parseInt(classes.value)*parseFloat(base.value) 
+                      + parseFloat(incent.value)
+                      + parseInt(sn.value)*2;
           needed.value=calcNeeded(parseFloat(target.value),
                                   parseInt(tier.value),
                                   parseFloat(base.value));">
 
 <label for="base">Base Pay: </label>
-<input type="number" id="base" name="base" min="7" max="10" step=".5" value="7">$
+<input type="number" id="base" name="base" min="7" max="10" step=".1" value="7">$
 <br>
 <label for="tier">Tier: </label>
 <input type="number" id="tier" name="tier" min="1" max="10" step="1" value="1">
 <br>
-<label for="classes">Classes/month: </label>
-<input type="number" id="classes" name="classes" min="1" max="1000" step="1" value="100">
+<label for="classes">Classes/Month: </label>
+<input type="number" id="classes" name="classes" min="0" max="1000" step="1" value="100">
+<br>
+<label for="classes">Short Notice Classes/Month: </label>
+<input type="number" id="sn" name="sn" min="0" max="1000" step="1" value="0">
 <br>
 <br>
 <label>Incentive: </label>
@@ -41,17 +46,17 @@ label {
 <br>
 <br>
 <label>Total: </label>
-<output name="total" for="base tier classes">842</output>$
+<output name="total" for="base tier classes sn">842</output>$/Month
 
 <br>
 <br>
 <br>
 
 <label for="target">Target Total: </label>
-<input type="number" id="target" name="target" min="0" max="10000" step="1" value="0">$
+<input type="number" id="target" name="target" min="0" max="10000" step="1" value="0">$/Month
 <br>
 <label>Classes Needed: </label>
-<output name="needed" for="target">0</output>
+<output name="needed" for="target">0</output>/Month
 </form>
 
 <br>
