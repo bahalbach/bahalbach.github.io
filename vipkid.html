@@ -18,10 +18,10 @@ label {
 <form 
  oninput="incent.value=calcServiceFee(parseInt(tier.value),parseInt(classes.value));
           ave.value=incent.value / parseInt(classes.value);
-          total.value=parseInt(classes.value)*parseInt(base.value) + parseInt(incent.value);">
+          total.value=parseInt(classes.value)*parseFloat(base.value) + parseInt(incent.value);">
 
 <label for="base">Base Pay: </label>
-<input type="number" id="base" name="base" min="7" max="10" step="1" value="7">
+<input type="number" id="base" name="base" min="7" max="10" step=".5" value="7">
 <br>
 <label for="tier">Tier: </label>
 <input type="number" id="tier" name="tier" min="1" max="10" step="1" value="1">
