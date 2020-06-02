@@ -15,7 +15,7 @@ label {
 <body>
 <h1>VIPKID Service Fee Calculator</h1>
 
-<form 
+<form id="form"
  oninput="incent.value=calcServiceFee(parseInt(tier.value),parseInt(classes.value));
           ave.value=incent.value / parseInt(classes.value);
           total.value=parseInt(classes.value)*parseFloat(base.value) 
@@ -23,7 +23,10 @@ label {
                       + parseInt(sn.value)*2;
           needed.value=calcNeeded(parseFloat(target.value),
                                   parseInt(tier.value),
-                                  parseFloat(base.value));">
+                                  parseFloat(base.value));
+          setLocalStorage(base.value,tier.value,classes.value,sn.value,
+                          incent.value,ave.value,total.value,
+                          target.value,needed.value);">
 
 <label for="base">Base Pay: $</label>
 <input type="number" id="base" name="base" min="7" max="10" step=".1" value="7">
@@ -39,14 +42,14 @@ label {
 <br>
 <br>
 <label>Incentive: $</label>
-<output name="incent" for="base tier classes">142</output>
+<output name="incent" id="incent" for="base tier classes">142</output>
 <br>
 <label>Per Class: $</label>
-<output name="ave" for="base tier classes">1.42</output>
+<output name="ave" id="ave" for="base tier classes">1.42</output>
 <br>
 <br>
-<label>Total: $</label>
-<output name="total" for="base tier classes sn">842</output>/Month
+<label><b>Total: $</b></label>
+<output name="total" id="total" for="base tier classes sn">842</output>/Month
 
 <br>
 <br>
@@ -56,7 +59,7 @@ label {
 <input type="number" id="target" name="target" min="0" max="10000" step="1" value="0">/Month
 <br>
 <label>Classes Needed: </label>
-<output name="needed" for="target">0</output>/Month
+<output name="needed" id="needed" for="target">0</output>/Month
 </form>
 
 <br>
@@ -77,6 +80,34 @@ label {
 </form>
 
 <script>
+//const classes = document.getElementById('classes');
+
+if (typeof(Storage) !== "undefined") {
+ document.getElementById("base").value = localStorage.getItem("base");
+ document.getElementById("tier").value = localStorage.getItem("tier");
+ document.getElementById("classes").value = localStorage.getItem("classes");
+ document.getElementById("sn").value = localStorage.getItem("sn");
+ document.getElementById("incent").innerHTML  = localStorage.getItem("incent");
+ document.getElementById("ave").innerHTML  = localStorage.getItem("ave");
+ document.getElementById("total").innerHTML  = localStorage.getItem("total");
+ document.getElementById("target").value = localStorage.getItem("target");
+ document.getElementById("needed").innerHTML  = localStorage.getItem("needed");
+}
+
+function setLocalStorage(base, tier, classes, sn, incent, ave, total, target, needed) {
+ if (typeof(Storage) !== "undefined") {
+  localStorage.setItem("base", base);
+  localStorage.setItem("tier", tier);
+  localStorage.setItem("classes", classes);
+  localStorage.setItem("sn", sn);
+  localStorage.setItem("incent", incent);
+  localStorage.setItem("ave", ave);
+  localStorage.setItem("total", total);
+  localStorage.setItem("target", target);
+  localStorage.setItem("needed", needed);
+ }
+}
+
 var tier1 = [.8,1.2,1.6,1.7,1.9,2.0,2.1];
 var tier2 = [.8,1.2,1.6,1.7,1.9,2.1,2.3];
 var tier3 = [.8,1.2,1.6,1.7,2.0,2.2,2.5];
