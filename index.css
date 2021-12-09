@@ -3,11 +3,16 @@ html {
 }
 
 h1 {
-  font: georgia;
+  font: Tisa, Helvetica, Arial, sans-serif;
   font-size: 2rem;
 }
 
-section,
+body {
+  margin: 0rem 1rem;
+}
+
 article {
-  margin: 1rem;
+  width: fit-content;
+  min-height: calc(100vh - 4rem);
+  margin: 1rem auto;
 }
